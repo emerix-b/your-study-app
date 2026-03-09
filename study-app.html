@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>✨ Study Space — Happy Birthday!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose:        #f4a7b9;
+    --rose-light:  #fce4ec;
+    --rose-deep:   #e8799a;
+    --lavender:    #c9b8e8;
+    --lavender-light: #ede8f8;
+    --lavender-deep: #9d86d4;
+    --sage:        #a8cba8;
+    --sage-light:  #dff0df;
+    --sage-deep:   #6aab6a;
+    --peach:       #f9c784;
+    --peach-light: #fff3dd;
+    --cream:       #fdf8f2;
+    --warm-white:  #fffdf9;
+    --text-dark:   #4a3f5c;
+    --text-mid:    #7a6d90;
+    --text-light:  #b0a5c4;
+    --shadow-soft: 0 4px 24px rgba(156, 120, 180, 0.12);
+    --shadow-card: 0 8px 32px rgba(156, 120, 180, 0.15);
+    --shadow-float:0 16px 48px rgba(156, 120, 180, 0.20);
+    --radius-xl:   24px;
+    --radius-lg:   16px;
+    --radius-md:   12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    width: 100%; min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── Background canvas ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 10% 15%, rgba(244,167,185,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 55% at 90% 80%, rgba(201,184,232,0.20) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(168,203,168,0.10) 0%, transparent 70%),
+      var(--cream);
+    z-index: -1;
+  }
+
+  /* ── Floating deco elements ── */
+  .deco-float {
+    position: fixed; pointer-events: none; z-index: 0;
+    font-size: 28px; opacity: 0.18;
+    animation: floatDrift 12s ease-in-out infinite;
+  }
+  .deco-float:nth-child(1) { top: 8%; left:  5%; animation-delay: 0s;    font-size: 22px; }
+  .deco-float:nth-child(2) { top: 15%; right: 7%; animation-delay: 2.5s; font-size: 18px; }
+  .deco-float:nth-child(3) { top: 55%; left:  3%; animation-delay: 5s;   font-size: 24px; }
+  .deco-float:nth-child(4) { top: 70%; right: 4%; animation-delay: 1.5s; font-size: 20px; }
+  .deco-float:nth-child(5) { top: 88%; left: 20%; animation-delay: 7s;   font-size: 16px; }
+  .deco-float:nth-child(6) { top: 30%; right:15%; animation-delay: 3.5s; font-size: 26px; }
+  @keyframes floatDrift {
+    0%, 100% { transform: translateY(0px) rotate(-5deg); }
+    50%       { transform: translateY(-18px) rotate(5deg); }
+  }
+
+  /* ── Header ── */
+  .app-header {
+    text-align: center;
+    padding: 40px 24px 24px;
+    position: relative; z-index: 10;
+    animation: fadeSlideDown 0.8s cubic-bezier(.22,1,.36,1) both;
+  }
+  .birthday-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--rose-light), var(--lavender-light));
+    border: 2px solid var(--rose);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 13px; font-weight: 700;
+    color: var(--rose-deep);
+    letter-spacing: 0.04em;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 12px rgba(232,121,154,0.18);
+  }
+  .app-header h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(26px, 5vw, 42px);
+    font-weight: 900;
+    color: var(--text-dark);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .app-header h1 span { color: var(--rose-deep); }
+  .subtitle {
+    font-size: 15px; font-weight: 600;
+    color: var(--text-mid);
+    margin-top: 8px;
+  }
+
+  /* ── Nav tabs ── */
+  .tab-bar {
+    display: flex; gap: 8px;
+    padding: 0 20px 20px;
+    justify-content: center;
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(to bottom, var(--cream) 80%, transparent);
+    padding-top: 12px;
+    animation: fadeSlideDown 0.8s 0.1s cubic-bezier(.22,1,.36,1) both;
+  }
+  .tab-btn {
+    flex: 1; max-width: 160px;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 10px 8px;
+    border: 2px solid transparent;
+    border-radius: var(--radius-lg);
+    background: white;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px; font-weight: 700;
+    color: var(--text-light);
+    box-shadow: var(--shadow-soft);
+    transition: all 0.25s cubic-bezier(.22,1,.36,1);
+    -webkit-user-select: none; user-select: none;
+    min-height: 56px;
+  }
+  .tab-btn .tab-icon { font-size: 20px; }
+  .tab-btn.active {
+    color: white;
+    border-color: transparent;
+    box-shadow: var(--shadow-card);
+    transform: translateY(-2px);
+  }
+  .tab-btn.active.tab-timer   { background: linear-gradient(135deg, var(--rose), var(--rose-deep)); }
+  .tab-btn.active.tab-notes   { background: linear-gradient(135deg, var(--lavender), var(--lavender-deep)); }
+  .tab-btn.active.tab-water   { background: linear-gradient(135deg, #7ec8e3, #4aa8cc); }
+  .tab-btn:not(.active):hover { transform: translateY(-1px); box-shadow: var(--shadow-card); }
+
+  /* ── Panels ── */
+  .panels { padding: 4px 16px 100px; position: relative; z-index: 10; }
+  .panel { display: none; animation: panelIn 0.4s cubic-bezier(.22,1,.36,1) both; }
+  .panel.active { display: block; }
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Card ── */
+  .card {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 13px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--text-light);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ═══════════════════════════════
+     POMODORO TIMER
+  ═══════════════════════════════ */
+  .timer-display {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 32px 0 24px;
+  }
+  .timer-mode-tag {
+    font-size: 12px; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+    transition: all 0.4s;
+  }
+  .timer-mode-tag.work  { background: var(--rose-light);  color: var(--rose-deep); }
+  .timer-mode-tag.break { background: var(--sage-light);  color: var(--sage-deep); }
+
+  /* SVG ring */
+  .timer-ring-wrap {
+    position: relative; width: 220px; height: 220px;
+    margin-bottom: 28px;
+  }
+  .timer-ring-wrap svg {
+    transform: rotate(-90deg);
+    width: 220px; height: 220px;
+  }
+  .ring-bg    { fill: none; stroke: var(--rose-light); stroke-width: 10; }
+  .ring-prog  {
+    fill: none; stroke: var(--rose-deep);
+    stroke-width: 10; stroke-linecap: round;
+    stroke-dasharray: 628; stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear, stroke 0.4s;
+  }
+  .ring-prog.break-mode { stroke: var(--sage-deep); }
+  .timer-time-overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .timer-digits {
+    font-size: 56px; font-weight: 900;
+    letter-spacing: -2px;
+    color: var(--text-dark);
+    font-variant-numeric: tabular-nums;
+    font-family: 'Nunito', sans-serif;
+    line-height: 1;
+  }
+  .timer-session-label {
+    font-size: 12px; font-weight: 700;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* Timer controls */
+  .timer-controls {
+    display: flex; gap: 12px; margin-bottom: 24px;
+  }
+  .btn-primary {
+    flex: 1; padding: 16px 20px;
+    border: none; border-radius: var(--radius-lg);
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px; font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(.22,1,.36,1);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    -webkit-user-select: none; user-select: none;
+    min-height: 52px;
+  }
+  .btn-primary:active { transform: scale(0.96); }
+  .btn-start  { background: linear-gradient(135deg, var(--rose), var(--rose-deep)); color: white; }
+  .btn-start.running { background: linear-gradient(135deg, #f9c784, #f0a830); }
+  .btn-reset  { background: var(--lavender-light); color: var(--lavender-deep); max-width: 80px; }
+  .btn-skip   { background: var(--sage-light); color: var(--sage-deep); max-width: 80px; }
+
+  /* Session dots */
+  .session-dots {
+    display: flex; gap: 8px; margin-bottom: 24px;
+  }
+  .session-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--rose-light);
+    transition: all 0.3s;
+  }
+  .session-dot.filled { background: var(--rose-deep); transform: scale(1.15); }
+
+  /* Settings */
+  .timer-settings {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .setting-item label {
+    display: block; font-size: 12px; font-weight: 700;
+    color: var(--text-light); margin-bottom: 6px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .setting-item input[type="number"] {
+    width: 100%; padding: 12px 14px;
+    border: 2px solid var(--lavender-light);
+    border-radius: var(--radius-md);
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px; font-weight: 700;
+    color: var(--text-dark);
+    background: var(--warm-white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .setting-item input:focus { border-color: var(--lavender); }
+
+  /* ═══════════════════════════════
+     NOTES
+  ═══════════════════════════════ */
+  .notes-toolbar {
+    display: flex; gap: 8px;
+    margin-bottom: 14px; flex-wrap: wrap;
+  }
+  .toolbar-btn {
+    padding: 8px 14px;
+    border: 2px solid var(--lavender-light);
+    border-radius: var(--radius-md);
+    background: white; cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--lavender-deep);
+    transition: all 0.2s;
+    -webkit-user-select: none; user-select: none;
+    min-height: 40px;
+  }
+  .toolbar-btn:active, .toolbar-btn.active {
+    background: var(--lavender); color: white; border-color: var(--lavender);
+  }
+  .toolbar-btn:hover { border-color: var(--lavender); }
+
+  .notes-list { display: flex; flex-direction: column; gap: 10px; }
+  .note-card {
+    background: var(--lavender-light);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    position: relative;
+    animation: noteSlideIn 0.3s cubic-bezier(.22,1,.36,1);
+  }
+  @keyframes noteSlideIn {
+    from { opacity: 0; transform: translateX(-12px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .note-card .note-title-input {
+    width: 100%; border: none; background: transparent;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px; font-weight: 800;
+    color: var(--text-dark); outline: none;
+    margin-bottom: 6px;
+  }
+  .note-card .note-title-input::placeholder { color: var(--text-light); }
+  .note-card .note-body {
+    width: 100%; min-height: 80px;
+    border: none; background: transparent;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px; font-weight: 500;
+    color: var(--text-mid); outline: none;
+    resize: none; line-height: 1.6;
+  }
+  .note-card .note-body::placeholder { color: var(--text-light); }
+  .note-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 10px;
+  }
+  .note-time { font-size: 11px; font-weight: 700; color: var(--text-light); }
+  .note-delete {
+    width: 28px; height: 28px;
+    border: none; border-radius: 50%;
+    background: rgba(232,121,154,0.15);
+    color: var(--rose-deep);
+    cursor: pointer; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    font-weight: 900;
+  }
+  .note-delete:hover { background: var(--rose-deep); color: white; }
+
+  .btn-new-note {
+    width: 100%; padding: 14px;
+    border: 2px dashed var(--lavender);
+    border-radius: var(--radius-lg);
+    background: transparent; cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: var(--lavender-deep);
+    transition: all 0.2s;
+    margin-bottom: 16px; min-height: 50px;
+    -webkit-user-select: none; user-select: none;
+  }
+  .btn-new-note:hover { background: var(--lavender-light); border-style: solid; }
+
+  /* ═══════════════════════════════
+     WATER TRACKER
+  ═══════════════════════════════ */
+  .water-hero {
+    text-align: center; padding: 16px 0 24px;
+  }
+  .water-big-count {
+    font-size: 80px; font-weight: 900;
+    line-height: 1; color: #4aa8cc;
+    font-family: 'Nunito', sans-serif;
+  }
+  .water-big-label {
+    font-size: 14px; font-weight: 700;
+    color: var(--text-light); margin-top: 4px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  .water-glasses {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 10px; margin: 20px 0;
+  }
+  .glass-icon {
+    aspect-ratio: 1; border-radius: var(--radius-md);
+    border: 2px solid #b8e0ef;
+    background: white;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(.22,1,.36,1);
+    position: relative; overflow: hidden;
+    -webkit-user-select: none; user-select: none;
+  }
+  .glass-icon::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(74,168,204,0.3), transparent);
+    height: 0%; transition: height 0.4s cubic-bezier(.22,1,.36,1);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+  .glass-icon.filled::after { height: 65%; }
+  .glass-icon.filled { border-color: #4aa8cc; background: rgba(74,168,204,0.08); }
+  .glass-icon:active { transform: scale(0.9); }
+
+  .water-btn-row { display: flex; gap: 10px; }
+  .btn-water-add {
+    flex: 2; padding: 16px;
+    background: linear-gradient(135deg, #7ec8e3, #4aa8cc);
+    border: none; border-radius: var(--radius-lg);
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px; font-weight: 800;
+    color: white; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(74,168,204,0.3);
+    transition: all 0.2s;
+    -webkit-user-select: none; user-select: none;
+    min-height: 52px;
+  }
+  .btn-water-add:active { transform: scale(0.97); }
+  .btn-water-undo {
+    flex: 1; padding: 16px;
+    background: #e8f6fb; border: 2px solid #b8e0ef;
+    border-radius: var(--radius-lg);
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: #4aa8cc; cursor: pointer;
+    transition: all 0.2s;
+    -webkit-user-select: none; user-select: none;
+    min-height: 52px;
+  }
+
+  /* Reminder settings */
+  .reminder-row {
+    display: flex; align-items: center; gap: 14px;
+    flex-wrap: wrap;
+  }
+  .reminder-row label {
+    font-size: 13px; font-weight: 700;
+    color: var(--text-mid); white-space: nowrap;
+  }
+  .reminder-select {
+    padding: 10px 14px;
+    border: 2px solid #b8e0ef;
+    border-radius: var(--radius-md);
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: var(--text-dark); background: white;
+    outline: none; cursor: pointer;
+    flex: 1;
+  }
+  .reminder-toggle {
+    position: relative; flex-shrink: 0;
+  }
+  .reminder-toggle input { display: none; }
+  .toggle-track {
+    width: 52px; height: 30px;
+    background: #ddd; border-radius: 100px;
+    cursor: pointer; transition: background 0.3s;
+    display: block; position: relative;
+  }
+  .toggle-track::after {
+    content: '';
+    position: absolute; top: 3px; left: 3px;
+    width: 24px; height: 24px;
+    border-radius: 50%; background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: transform 0.3s cubic-bezier(.22,1,.36,1);
+  }
+  .reminder-toggle input:checked + .toggle-track { background: #4aa8cc; }
+  .reminder-toggle input:checked + .toggle-track::after { transform: translateX(22px); }
+
+  /* ── Water streak ── */
+  .streak-bar {
+    display: flex; gap: 4px; align-items: center;
+    flex-wrap: wrap;
+  }
+  .streak-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: #b8e0ef; transition: all 0.3s;
+  }
+  .streak-dot.hit { background: #4aa8cc; }
+
+  /* ── Toast notification ── */
+  #toast {
+    position: fixed; bottom: 32px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--text-dark); color: white;
+    padding: 14px 24px; border-radius: 100px;
+    font-size: 14px; font-weight: 700;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    z-index: 9999; transition: transform 0.4s cubic-bezier(.22,1,.36,1);
+    white-space: nowrap; max-width: 90vw;
+    text-align: center;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── Water reminder popup ── */
+  .water-popup {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(74, 63, 92, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 8888;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .water-popup.show { opacity: 1; pointer-events: all; }
+  .water-popup-inner {
+    background: white; border-radius: 28px;
+    padding: 36px 28px; max-width: 360px; width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-float);
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(.22,1,.36,1);
+  }
+  .water-popup.show .water-popup-inner { transform: scale(1); }
+  .water-popup-inner .popup-icon { font-size: 56px; margin-bottom: 12px; }
+  .water-popup-inner h3 {
+    font-size: 22px; font-weight: 900;
+    color: var(--text-dark); margin-bottom: 8px;
+  }
+  .water-popup-inner p {
+    font-size: 14px; font-weight: 600;
+    color: var(--text-mid); margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .popup-btn-row { display: flex; gap: 10px; }
+  .popup-btn-drink {
+    flex: 2; padding: 15px;
+    background: linear-gradient(135deg, #7ec8e3, #4aa8cc);
+    border: none; border-radius: var(--radius-lg);
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px; font-weight: 800;
+    color: white; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(74,168,204,0.3);
+    min-height: 50px;
+  }
+  .popup-btn-skip {
+    flex: 1; padding: 15px;
+    background: var(--lavender-light); border: none;
+    border-radius: var(--radius-lg);
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: var(--lavender-deep); cursor: pointer;
+    min-height: 50px;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.04); }
+  }
+  .timer-running .timer-digits { animation: pulse 2s ease-in-out infinite; }
+
+  /* ── Landscape / large iPad ── */
+  @media (min-width: 768px) {
+    .panels { max-width: 680px; margin: 0 auto; }
+    .app-header { padding-top: 48px; }
+    .tab-bar { max-width: 680px; margin: 0 auto; }
+    .timer-settings { grid-template-columns: repeat(2, 1fr); }
+    .water-glasses { grid-template-columns: repeat(8, 1fr); }
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    .app-header { padding: 16px 24px 8px; }
+    .app-header h1 { font-size: 22px; }
+    .birthday-badge { display: none; }
+    .timer-ring-wrap { width: 160px; height: 160px; }
+    .timer-ring-wrap svg { width: 160px; height: 160px; }
+    .timer-digits { font-size: 40px; }
+  }
+
+  /* safe areas for iPad */
+  .panels { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
+  .tab-bar { padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
+</style>
+</head>
+<body>
+
+<!-- Floating decorative elements -->
+<div class="deco-float">🌸</div>
+<div class="deco-float">✨</div>
+<div class="deco-float">🌿</div>
+<div class="deco-float">💜</div>
+<div class="deco-float">⭐</div>
+<div class="deco-float">🌷</div>
+
+<!-- Water Reminder Popup -->
+<div class="water-popup" id="waterPopup">
+  <div class="water-popup-inner">
+    <div class="popup-icon">💧</div>
+    <h3>Hydration check!</h3>
+    <p>You've been studying hard ✨<br>Don't forget to take a sip of water!</p>
+    <div class="popup-btn-row">
+      <button class="popup-btn-drink" onclick="popupDrink()">💙 I drank water!</button>
+      <button class="popup-btn-skip" onclick="popupSkip()">Not now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- Header -->
+<header class="app-header">
+  <div class="birthday-badge">🎂 Happy Birthday, Maha! 🎉</div>
+  <h1>Your Study <span>Space</span></h1>
+  <p class="subtitle">Focus, and don't get distracted 😡😤😘</p>
+</header>
+
+<!-- Tab Bar -->
+<nav class="tab-bar">
+  <button class="tab-btn tab-timer active" onclick="switchTab('timer', this)">
+    <span class="tab-icon">🍅</span>
+    <span>Timer</span>
+  </button>
+  <button class="tab-btn tab-notes" onclick="switchTab('notes', this)">
+    <span class="tab-icon">📝</span>
+    <span>Notes</span>
+  </button>
+  <button class="tab-btn tab-water" onclick="switchTab('water', this)">
+    <span class="tab-icon">💧</span>
+    <span>Water</span>
+  </button>
+</nav>
+
+<!-- Panels -->
+<main class="panels">
+
+  <!-- ── TIMER PANEL ── -->
+  <section class="panel active" id="panel-timer">
+    <div class="card">
+      <div class="timer-display" id="timerDisplay">
+        <div class="timer-mode-tag work" id="timerModeTag">🌟 Work Session</div>
+
+        <div class="timer-ring-wrap">
+          <svg viewBox="0 0 220 220">
+            <circle class="ring-bg" cx="110" cy="110" r="100"/>
+            <circle class="ring-prog" id="ringProg" cx="110" cy="110" r="100"/>
+          </svg>
+          <div class="timer-time-overlay">
+            <div class="timer-digits" id="timerDigits">25:00</div>
+            <div class="timer-session-label" id="sessionLabel">Session 1 of 4</div>
+          </div>
+        </div>
+
+        <div class="session-dots" id="sessionDots">
+          <div class="session-dot filled"></div>
+          <div class="session-dot"></div>
+          <div class="session-dot"></div>
+          <div class="session-dot"></div>
+        </div>
+
+        <div class="timer-controls">
+          <button class="btn-primary btn-start" id="startBtn" onclick="toggleTimer()">▶ Start</button>
+          <button class="btn-primary btn-skip"  onclick="skipSession()">⏭</button>
+          <button class="btn-primary btn-reset" onclick="resetTimer()">↺</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚙️ Customize</div>
+      <div class="timer-settings">
+        <div class="setting-item">
+          <label>Work (min)</label>
+          <input type="number" id="workMin" min="1" max="60" value="25" onchange="applySettings()">
+        </div>
+        <div class="setting-item">
+          <label>Break (min)</label>
+          <input type="number" id="breakMin" min="1" max="30" value="5" onchange="applySettings()">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NOTES PANEL ── -->
+  <section class="panel" id="panel-notes">
+    <button class="btn-new-note" onclick="createNote()">＋ New Note</button>
+    <div class="notes-list" id="notesList"></div>
+  </section>
+
+  <!-- ── WATER PANEL ── -->
+  <section class="panel" id="panel-water">
+    <div class="card">
+      <div class="water-hero">
+        <div class="water-big-count" id="waterCount">0</div>
+        <div class="water-big-label">glasses today</div>
+      </div>
+      <div class="water-glasses" id="waterGlasses"></div>
+      <div class="water-btn-row">
+        <button class="btn-water-add" onclick="addWater()">💧 Drank a glass!</button>
+        <button class="btn-water-undo" onclick="undoWater()">↩ Undo</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⏰ Reminder</div>
+      <div class="reminder-row">
+        <label>Remind me every</label>
+        <select class="reminder-select" id="reminderInterval" onchange="saveWaterSettings()">
+          <option value="15">15 minutes</option>
+          <option value="30" selected>30 minutes</option>
+          <option value="45">45 minutes</option>
+          <option value="60">60 minutes</option>
+          <option value="90">90 minutes</option>
+        </select>
+        <label class="reminder-toggle">
+          <input type="checkbox" id="reminderEnabled" onchange="saveWaterSettings()" checked>
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📅 Today's streak</div>
+      <div class="streak-bar" id="streakBar"></div>
+      <p style="font-size:12px;color:var(--text-light);margin-top:10px;font-weight:600;">Goal: 8 glasses · Resets at midnight</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   UTILITY
+══════════════════════════════════════════════════════════ */
+const $ = id => document.getElementById(id);
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+function saveLS(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch(e) {}
+}
+function loadLS(key, def) {
+  try {
+    const v = localStorage.getItem(key);
+    return v !== null ? JSON.parse(v) : def;
+  } catch(e) { return def; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   TAB SWITCHING
+══════════════════════════════════════════════════════════ */
+function switchTab(name, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  $('panel-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ══════════════════════════════════════════════════════════
+   POMODORO TIMER
+══════════════════════════════════════════════════════════ */
+let timer = {
+  running: false,
+  isBreak: false,
+  session: 1,            // 1-4
+  workMins: 25,
+  breakMins: 5,
+  totalSeconds: 25 * 60,
+  remaining: 25 * 60,
+  startEpoch: null,      // epoch ms when timer last started
+  pausedAt: null,        // remaining seconds when paused
+};
+let timerInterval = null;
+const CIRC = 2 * Math.PI * 100; // 628.3
+
+function loadTimerState() {
+  const saved = loadLS('pomo_state', null);
+  if (!saved) return;
+  Object.assign(timer, saved);
+
+  // If it was running, recalculate elapsed time
+  if (timer.running && timer.startEpoch) {
+    const elapsed = Math.floor((Date.now() - timer.startEpoch) / 1000);
+    timer.remaining = Math.max(0, (timer.pausedAt || timer.totalSeconds) - elapsed);
+    if (timer.remaining === 0) {
+      // Session completed while away
+      timer.running = false;
+      autoAdvanceSession();
+    }
+  }
+}
+
+function saveTimerState() {
+  const snapshot = { ...timer };
+  if (timer.running) snapshot.pausedAt = timer.remaining;
+  saveLS('pomo_state', snapshot);
+}
+
+function applySettings() {
+  const w = parseInt($('workMin').value) || 25;
+  const b = parseInt($('breakMin').value) || 5;
+  timer.workMins  = Math.min(60, Math.max(1, w));
+  timer.breakMins = Math.min(30, Math.max(1, b));
+  $('workMin').value  = timer.workMins;
+  $('breakMin').value = timer.breakMins;
+  if (!timer.running) resetTimer(true);
+  saveTimerState();
+}
+
+function resetTimer(silent = false) {
+  clearInterval(timerInterval); timerInterval = null;
+  timer.running = false;
+  timer.isBreak = false;
+  timer.session = 1;
+  timer.totalSeconds = timer.workMins * 60;
+  timer.remaining    = timer.workMins * 60;
+  timer.startEpoch   = null;
+  timer.pausedAt     = null;
+  renderTimer();
+  saveTimerState();
+  if (!silent) showToast('Timer reset 🔄');
+}
+
+function toggleTimer() {
+  if (timer.running) {
+    // Pause
+    clearInterval(timerInterval); timerInterval = null;
+    timer.running   = false;
+    timer.pausedAt  = timer.remaining;
+    timer.startEpoch = null;
+    $('startBtn').textContent = '▶ Resume';
+    $('startBtn').classList.remove('running');
+    $('timerDisplay').classList.remove('timer-running');
+  } else {
+    // Start / Resume
+    timer.running    = true;
+    timer.startEpoch = Date.now();
+    timer.pausedAt   = timer.remaining;
+    $('startBtn').textContent = '⏸ Pause';
+    $('startBtn').classList.add('running');
+    $('timerDisplay').classList.add('timer-running');
+    timerInterval = setInterval(tickTimer, 500);
+  }
+  saveTimerState();
+}
+
+function tickTimer() {
+  if (!timer.running || !timer.startEpoch) return;
+  const elapsed   = Math.floor((Date.now() - timer.startEpoch) / 1000);
+  const base      = timer.pausedAt !== null ? timer.pausedAt : timer.totalSeconds;
+  timer.remaining = Math.max(0, base - elapsed);
+  renderTimer();
+  saveTimerState();
+
+  if (timer.remaining === 0) {
+    clearInterval(timerInterval); timerInterval = null;
+    timer.running = false;
+    $('timerDisplay').classList.remove('timer-running');
+    onSessionComplete();
+  }
+}
+
+function onSessionComplete() {
+  playAlertSound();
+  requestNotification(
+    timer.isBreak ? '☀️ Break over! Time to focus.' : '🎉 Great work! Take a break.',
+    timer.isBreak ? 'Work session starting...' : 'You earned a ' + timer.breakMins + 'min break!'
+  );
+  showToast(timer.isBreak ? '☀️ Break over! Let\'s focus!' : '🎉 Session done! Take a break!');
+  autoAdvanceSession();
+}
+
+function autoAdvanceSession() {
+  if (!timer.isBreak) {
+    // Completed a work session → start break
+    timer.session  = Math.min(timer.session + 1, 4);
+    timer.isBreak  = true;
+    timer.totalSeconds = timer.breakMins * 60;
+    timer.remaining    = timer.breakMins * 60;
+  } else {
+    // Completed break → start work
+    if (timer.session >= 4) timer.session = 0;
+    timer.isBreak  = false;
+    timer.totalSeconds = timer.workMins * 60;
+    timer.remaining    = timer.workMins * 60;
+  }
+  timer.startEpoch = null;
+  timer.pausedAt   = null;
+  renderTimer();
+  saveTimerState();
+}
+
+function skipSession() {
+  clearInterval(timerInterval); timerInterval = null;
+  timer.running = false;
+  $('timerDisplay').classList.remove('timer-running');
+  autoAdvanceSession();
+  showToast('Skipped ⏭');
+}
+
+function renderTimer() {
+  // Digits
+  const m = Math.floor(timer.remaining / 60);
+  const s = timer.remaining % 60;
+  $('timerDigits').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+
+  // Ring
+  const pct = timer.remaining / timer.totalSeconds;
+  const offset = CIRC * (1 - pct);
+  const ring = $('ringProg');
+  ring.style.strokeDasharray  = CIRC;
+  ring.style.strokeDashoffset = offset;
+  ring.classList.toggle('break-mode', timer.isBreak);
+
+  // Mode tag
+  const tag = $('timerModeTag');
+  if (timer.isBreak) {
+    tag.textContent = '🌿 Break Time';
+    tag.className = 'timer-mode-tag break';
+  } else {
+    tag.textContent = '🌟 Work Session';
+    tag.className = 'timer-mode-tag work';
+  }
+
+  // Session label
+  $('sessionLabel').textContent = 'Session ' + timer.session + ' of 4';
+
+  // Session dots
+  const dots = document.querySelectorAll('.session-dot');
+  dots.forEach((d, i) => d.classList.toggle('filled', i < timer.session));
+
+  // Start button
+  const startBtn = $('startBtn');
+  if (timer.running) {
+    startBtn.textContent = '⏸ Pause';
+    startBtn.classList.add('running');
+    $('timerDisplay').classList.add('timer-running');
+  } else {
+    startBtn.textContent = timer.pausedAt && timer.pausedAt < timer.totalSeconds ? '▶ Resume' : '▶ Start';
+    startBtn.classList.remove('running');
+    $('timerDisplay').classList.remove('timer-running');
+  }
+
+  // Inputs
+  $('workMin').value  = timer.workMins;
+  $('breakMin').value = timer.breakMins;
+}
+
+/* Resume timer on visibility change */
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) return;
+  if (timer.running && timer.startEpoch) {
+    const elapsed = Math.floor((Date.now() - timer.startEpoch) / 1000);
+    const base    = timer.pausedAt !== null ? timer.pausedAt : timer.totalSeconds;
+    timer.remaining = Math.max(0, base - elapsed);
+    if (timer.remaining === 0) {
+      clearInterval(timerInterval); timerInterval = null;
+      timer.running = false;
+      onSessionComplete();
+    }
+    renderTimer();
+  }
+});
+
+/* ── Audio alert ── */
+function playAlertSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const freqs = [523, 659, 784, 1047];
+    freqs.forEach((f, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = f;
+      gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.18);
+      gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + i * 0.18 + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.18 + 0.5);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + i * 0.18);
+      osc.stop(ctx.currentTime + i * 0.18 + 0.5);
+    });
+  } catch(e) {}
+}
+
+/* ── Notifications ── */
+async function requestNotification(title, body) {
+  if (!('Notification' in window)) return;
+  if (Notification.permission === 'default') await Notification.requestPermission();
+  if (Notification.permission === 'granted') {
+    try { new Notification(title, { body, icon: '' }); } catch(e) {}
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   NOTES
+══════════════════════════════════════════════════════════ */
+let notes = [];
+
+function loadNotes() {
+  notes = loadLS('study_notes', []);
+  renderNotes();
+}
+
+function saveNotes() { saveLS('study_notes', notes); }
+
+function createNote() {
+  const note = {
+    id: Date.now(),
+    title: '',
+    body: '',
+    created: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  };
+  notes.unshift(note);
+  saveNotes();
+  renderNotes();
+  // Focus the new note's title
+  setTimeout(() => {
+    const el = document.querySelector('.note-card [data-id="' + note.id + '"]');
+    if (el) el.focus();
+  }, 80);
+}
+
+function deleteNote(id) {
+  notes = notes.filter(n => n.id !== id);
+  saveNotes();
+  renderNotes();
+  showToast('Note deleted 🗑️');
+}
+
+function updateNote(id, field, val) {
+  const n = notes.find(n => n.id === id);
+  if (n) { n[field] = val; saveNotes(); }
+}
+
+function renderNotes() {
+  const list = $('notesList');
+  if (notes.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:40px 20px;color:var(--text-light);font-size:14px;font-weight:600;">No notes yet ✨<br><small style="font-weight:500;opacity:0.7">Tap + New Note to get started</small></div>';
+    return;
+  }
+  list.innerHTML = notes.map(n => `
+    <div class="note-card">
+      <input class="note-title-input" data-id="${n.id}"
+        placeholder="Note title…"
+        value="${escHtml(n.title)}"
+        oninput="updateNote(${n.id},'title',this.value)">
+      <textarea class="note-body"
+        placeholder="Start writing…"
+        oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px';updateNote(${n.id},'body',this.value)"
+        style="height:auto"
+        >${escHtml(n.body)}</textarea>
+      <div class="note-meta">
+        <span class="note-time">⏱ ${n.created}</span>
+        <button class="note-delete" onclick="deleteNote(${n.id})" title="Delete">✕</button>
+      </div>
+    </div>
+  `).join('');
+  // Auto-size textareas
+  list.querySelectorAll('.note-body').forEach(ta => {
+    ta.style.height = 'auto';
+    ta.style.height = ta.scrollHeight + 'px';
+  });
+}
+
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+/* ══════════════════════════════════════════════════════════
+   WATER TRACKER
+══════════════════════════════════════════════════════════ */
+let water = {
+  count: 0,
+  goal: 8,
+  lastDate: null,
+  reminderEnabled: true,
+  reminderMins: 30,
+  lastReminderEpoch: null,
+};
+let waterReminderInterval = null;
+
+function loadWater() {
+  const saved = loadLS('water_state', null);
+  if (saved) Object.assign(water, saved);
+
+  // Reset count if new day
+  const today = new Date().toDateString();
+  if (water.lastDate !== today) {
+    water.count = 0;
+    water.lastDate = today;
+    saveWaterState();
+  }
+
+  $('reminderInterval').value = water.reminderMins;
+  $('reminderEnabled').checked = water.reminderEnabled;
+  renderWater();
+  scheduleWaterReminder();
+}
+
+function saveWaterState() { saveLS('water_state', water); }
+
+function saveWaterSettings() {
+  water.reminderMins    = parseInt($('reminderInterval').value) || 30;
+  water.reminderEnabled = $('reminderEnabled').checked;
+  saveWaterState();
+  scheduleWaterReminder();
+  showToast(water.reminderEnabled
+    ? '💧 Reminder set for every ' + water.reminderMins + ' min'
+    : '🔕 Reminders paused');
+}
+
+function addWater() {
+  water.count = Math.min(water.count + 1, 20);
+  water.lastDate = new Date().toDateString();
+  saveWaterState();
+  renderWater();
+  if (water.count === water.goal) showToast('🎉 Goal reached! 8 glasses today!');
+  else showToast('💧 Glass ' + water.count + ' logged!');
+}
+
+function undoWater() {
+  if (water.count > 0) { water.count--; saveWaterState(); renderWater(); showToast('↩ Undone'); }
+}
+
+function renderWater() {
+  $('waterCount').textContent = water.count;
+
+  // Glasses grid (8 icons)
+  const grid = $('waterGlasses');
+  grid.innerHTML = '';
+  for (let i = 0; i < water.goal; i++) {
+    const d = document.createElement('div');
+    d.className = 'glass-icon' + (i < water.count ? ' filled' : '');
+    d.textContent = '🥛';
+    d.addEventListener('click', () => {
+      if (i < water.count) undoWater(); else addWater();
+    });
+    grid.appendChild(d);
+  }
+
+  // Streak dots (14 days — stored per day)
+  const streak = loadLS('water_streak', {});
+  const today  = new Date().toDateString();
+  if (water.count > 0) { streak[today] = water.count; saveLS('water_streak', streak); }
+
+  const bar = $('streakBar');
+  bar.innerHTML = '';
+  for (let i = 13; i >= 0; i--) {
+    const d2 = new Date(); d2.setDate(d2.getDate() - i);
+    const key = d2.toDateString();
+    const dot = document.createElement('div');
+    dot.className = 'streak-dot' + (streak[key] >= water.goal ? ' hit' : '');
+    dot.title = key + ': ' + (streak[key] || 0) + ' glasses';
+    bar.appendChild(dot);
+  }
+}
+
+function scheduleWaterReminder() {
+  clearInterval(waterReminderInterval);
+  if (!water.reminderEnabled) return;
+  const ms = water.reminderMins * 60 * 1000;
+  waterReminderInterval = setInterval(triggerWaterReminder, ms);
+}
+
+function triggerWaterReminder() {
+  if (!water.reminderEnabled) return;
+  water.lastReminderEpoch = Date.now();
+  saveWaterState();
+  $('waterPopup').classList.add('show');
+  playWaterChime();
+  requestNotification('💧 Hydration time!', 'Take a sip of water 🌟');
+}
+
+function popupDrink() {
+  $('waterPopup').classList.remove('show');
+  addWater();
+}
+function popupSkip() {
+  $('waterPopup').classList.remove('show');
+  showToast('No worries! Drink when you can 💧');
+}
+
+function playWaterChime() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [784, 1047, 1319].forEach((f, i) => {
+      const osc  = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = f;
+      gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.22);
+      gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + i * 0.22 + 0.06);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.22 + 0.6);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + i * 0.22);
+      osc.stop(ctx.currentTime + i * 0.22 + 0.6);
+    });
+  } catch(e) {}
+}
+
+/* Visibility change — check if reminder due */
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden || !water.reminderEnabled) return;
+  if (!water.lastReminderEpoch) return;
+  const elapsed = (Date.now() - water.lastReminderEpoch) / 1000 / 60;
+  if (elapsed >= water.reminderMins) triggerWaterReminder();
+});
+
+/* ══════════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════════ */
+(function init() {
+  loadTimerState();
+  renderTimer();
+  // If timer was running, restart interval
+  if (timer.running) {
+    $('startBtn').textContent = '⏸ Pause';
+    $('startBtn').classList.add('running');
+    $('timerDisplay').classList.add('timer-running');
+    timerInterval = setInterval(tickTimer, 500);
+  }
+
+  loadNotes();
+  loadWater();
+
+  // Request notification permission on first load (low-friction)
+  setTimeout(() => {
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+  }, 3000);
+
+  console.log('✨ Study app loaded — Happy Birthday Maha! 🎂');
+})();
+</script>
+</body>
+</html>
